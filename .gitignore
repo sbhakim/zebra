@@ -1,0 +1,204 @@
+# keys and local env
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+id_rsa
+id_rsa.*
+id_ed25519*
+.netrc
+secrets.yaml
+secrets.yml
+secrets.json
+credentials.json
+creds.json
+service-account*.json
+*_credentials.json
+.aws/
+.gcp/
+
+# the RPL corpus is third party (uu-core/IoT-Attacks-IDS, BSD-3), see README
+/corpus/
+/data/
+
+# run outputs and everything the generators emit; nothing here is a source file
+# Derived, but the aggregated summaries are small and let a reader check every
+# number in the paper without re-running the grid. Per-run artifacts and the
+# OOD sweep are not: see generated/README.md.
+/generated/*
+!/generated/README.md
+!/generated/*.json
+!/generated/*.csv
+/generated/runs/
+/generated/ood/
+/generated/smoke*/
+/generated/figures/
+/runs/
+/results/
+/output/
+/eval_output/
+/experiments/
+/logs/
+/tmp/
+/scratch/
+*.jsonl
+
+# working notes, only the README goes in
+*.md
+!README.md
+!LICENSE*
+!CITATION.cff
+!CONTRIBUTING.md
+!docs/
+!docs/**/*.md
+
+# paper lives in its own tree
+*.tex
+*.bib
+*.cls
+*.sty
+*.bst
+Manuscript*/
+manuscript/
+paper/
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.lot
+*.out
+*.synctex.gz
+*.toc
+*.nav
+*.snm
+*.vrb
+
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.nox/
+
+# notebooks
+*.ipynb
+.ipynb_checkpoints/
+
+# weights and anything serialised
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.onnx
+*.ckpt
+*.h5
+*.hdf5
+*.joblib
+*.pkl
+*.pickle
+*.npy
+*.npz
+# ...except golden arrays a test needs to run from a fresh clone
+!tests/**/fixtures/**/*.npy
+!tests/**/fixtures/**/*.npz
+*.parquet
+*.feather
+*.arrow
+*.db
+*.sqlite
+*.sqlite3
+/models/
+/checkpoints/
+.cache/
+huggingface/
+
+# archives
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.gz
+*.bz2
+*.xz
+*.7z
+*.rar
+
+# tracking / profiling
+wandb/
+mlruns/
+tensorboard/
+lightning_logs/
+events.out.tfevents.*
+*.prof
+*.lprof
+
+# figures
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.pdf
+*.eps
+
+# editors and assistants
+.claude/
+.claude
+CLAUDE.md
+.codex/
+.codex
+AGENTS.md
+GEMINI.md
+.cursor/
+.cursorrules
+.cursorignore
+.aider*
+.continue/
+.windsurfrules
+.roo/
+.cline*
+.github/copilot-instructions.md
+.specstory/
+.idea/
+.vscode/
+
+# os / leftovers
+*~
+*.tmp
+*.orig
+*.rej
+*.bak
+*.swp
+.*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# editor/session backups
+*.bak-*
+*.bak
+
+# dependency locks are reproducibility artifacts: keep them if they appear
+!uv.lock
+!poetry.lock
+!requirements*.txt
+
+# re-assert after the LaTeX block, which would otherwise swallow the generated
+# macro files the manuscript consumes
+!/generated/*.tex
