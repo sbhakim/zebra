@@ -1,0 +1,6 @@
+attack,r1_solicitation,r2_regularity,r3_dispersion,best,best_auc,above_reference
+blackhole,0.5,0.511,0.452,R2-REG,0.511,False
+disflooding,0.995,0.96,0.734,R1-SOL,0.995,True
+localrepair,0.602,0.868,0.833,R2-REG,0.868,True
+versionnumber,0.803,0.573,0.456,R1-SOL,0.803,True
+worstparent,0.6,0.571,0.7,R3-DISP,0.7,True

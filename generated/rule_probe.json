@@ -1,0 +1,47 @@
+[
+ {
+  "attack": "blackhole",
+  "r1_solicitation": 0.5,
+  "r2_regularity": 0.511,
+  "r3_dispersion": 0.452,
+  "best": "R2-REG",
+  "best_auc": 0.511,
+  "above_reference": false
+ },
+ {
+  "attack": "disflooding",
+  "r1_solicitation": 0.995,
+  "r2_regularity": 0.96,
+  "r3_dispersion": 0.734,
+  "best": "R1-SOL",
+  "best_auc": 0.995,
+  "above_reference": true
+ },
+ {
+  "attack": "localrepair",
+  "r1_solicitation": 0.602,
+  "r2_regularity": 0.868,
+  "r3_dispersion": 0.833,
+  "best": "R2-REG",
+  "best_auc": 0.868,
+  "above_reference": true
+ },
+ {
+  "attack": "versionnumber",
+  "r1_solicitation": 0.803,
+  "r2_regularity": 0.573,
+  "r3_dispersion": 0.456,
+  "best": "R1-SOL",
+  "best_auc": 0.803,
+  "above_reference": true
+ },
+ {
+  "attack": "worstparent",
+  "r1_solicitation": 0.6,
+  "r2_regularity": 0.571,
+  "r3_dispersion": 0.7,
+  "best": "R3-DISP",
+  "best_auc": 0.7,
+  "above_reference": true
+ }
+]

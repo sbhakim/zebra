@@ -1,0 +1,32 @@
+{
+ "no-cl": {
+  "model": 4248,
+  "retained": 0,
+  "opt": 8520
+ },
+ "ewc": {
+  "model": 4248,
+  "retained": 8496,
+  "opt": 8520
+ },
+ "si": {
+  "model": 4248,
+  "retained": 8496,
+  "opt": 8520
+ },
+ "replay": {
+  "model": 4248,
+  "retained": 1136000,
+  "opt": 8520
+ },
+ "gen-replay": {
+  "model": 4248,
+  "retained": 24840,
+  "opt": 8520
+ },
+ "zebra": {
+  "model": 4248,
+  "retained": 0,
+  "opt": 8520
+ }
+}

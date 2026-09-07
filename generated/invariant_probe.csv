@@ -1,0 +1,6 @@
+attack,i1_cons,i2_tric,i3_rank,best,best_auc,covered
+blackhole,0.5,0.511,0.452,I2-TRIC,0.511,False
+disflooding,0.995,0.96,0.734,I1-CONS,0.995,True
+localrepair,0.602,0.868,0.833,I2-TRIC,0.868,True
+versionnumber,0.803,0.573,0.456,I1-CONS,0.803,True
+worstparent,0.6,0.571,0.7,I3-RANK,0.7,True

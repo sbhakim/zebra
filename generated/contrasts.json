@@ -1,0 +1,178 @@
+[
+  {
+    "left": "replay",
+    "right": "lwf",
+    "metric": "auc",
+    "mean_difference": 0.007406360434003445,
+    "low": 0.0028526397239724433,
+    "high": 0.011960081144034447,
+    "wilcoxon_p": 0.01220703125,
+    "ttest_p": 0.00863992344487961,
+    "n_pairs": 12
+  },
+  {
+    "left": "replay",
+    "right": "lwf",
+    "metric": "final_bwt_auc",
+    "mean_difference": 0.009207336899579378,
+    "low": 0.004382259797641098,
+    "high": 0.014032414001517658,
+    "wilcoxon_p": 0.00927734375,
+    "ttest_p": 0.0032654852515891218,
+    "n_pairs": 12
+  },
+  {
+    "left": "replay",
+    "right": "si",
+    "metric": "auc",
+    "mean_difference": 0.007409899157586035,
+    "low": 0.00043391635456676257,
+    "high": 0.014385881960605307,
+    "wilcoxon_p": 0.06396484375,
+    "ttest_p": 0.06149429765457349,
+    "n_pairs": 12
+  },
+  {
+    "left": "replay",
+    "right": "si",
+    "metric": "final_bwt_auc",
+    "mean_difference": 0.0011530327482327369,
+    "low": -0.006989470953922939,
+    "high": 0.009295536450388412,
+    "wilcoxon_p": 0.90966796875,
+    "ttest_p": 0.786505495417041,
+    "n_pairs": 12
+  },
+  {
+    "left": "replay",
+    "right": "no-cl",
+    "metric": "auc",
+    "mean_difference": 0.01837169672912529,
+    "low": 0.010872774911049368,
+    "high": 0.025870618547201213,
+    "wilcoxon_p": 0.0009765625,
+    "ttest_p": 0.000551726107742041,
+    "n_pairs": 12
+  },
+  {
+    "left": "replay",
+    "right": "no-cl",
+    "metric": "final_bwt_auc",
+    "mean_difference": 0.019499975581689484,
+    "low": 0.013494881015078834,
+    "high": 0.025505070148300134,
+    "wilcoxon_p": 0.00048828125,
+    "ttest_p": 5.335833551522678e-05,
+    "n_pairs": 12
+  },
+  {
+    "left": "lwf",
+    "right": "no-cl",
+    "metric": "auc",
+    "mean_difference": 0.010965336295121845,
+    "low": 0.004676133697272901,
+    "high": 0.017254538892970787,
+    "wilcoxon_p": 0.00244140625,
+    "ttest_p": 0.00575064796251203,
+    "n_pairs": 12
+  },
+  {
+    "left": "lwf",
+    "right": "no-cl",
+    "metric": "final_bwt_auc",
+    "mean_difference": 0.010292638682110104,
+    "low": 0.00504135717617458,
+    "high": 0.015543920188045629,
+    "wilcoxon_p": 0.00244140625,
+    "ttest_p": 0.002738721056668982,
+    "n_pairs": 12
+  },
+  {
+    "left": "si",
+    "right": "no-cl",
+    "metric": "auc",
+    "mean_difference": 0.010961797571539256,
+    "low": 0.0020219712112994354,
+    "high": 0.019901623931779078,
+    "wilcoxon_p": 0.04248046875,
+    "ttest_p": 0.03502714550862671,
+    "n_pairs": 12
+  },
+  {
+    "left": "si",
+    "right": "no-cl",
+    "metric": "final_bwt_auc",
+    "mean_difference": 0.018346942833456743,
+    "low": 0.010155438134058243,
+    "high": 0.026538447532855242,
+    "wilcoxon_p": 0.00048828125,
+    "ttest_p": 0.0010811512885939348,
+    "n_pairs": 12
+  },
+  {
+    "left": "zebra",
+    "right": "no-cl",
+    "metric": "auc",
+    "mean_difference": -0.003150216472585741,
+    "low": -0.008954441372171199,
+    "high": 0.0026540084269997166,
+    "wilcoxon_p": 0.2333984375,
+    "ttest_p": 0.31022297003713695,
+    "n_pairs": 12
+  },
+  {
+    "left": "zebra",
+    "right": "no-cl",
+    "metric": "final_bwt_auc",
+    "mean_difference": -9.123823298708376e-05,
+    "low": -0.004942984506194022,
+    "high": 0.004760508040219854,
+    "wilcoxon_p": 0.9697265625,
+    "ttest_p": 0.9712584097453247,
+    "n_pairs": 12
+  },
+  {
+    "left": "zebra",
+    "right": "zebra-shuffled",
+    "metric": "auc",
+    "mean_difference": -0.001891254290838094,
+    "low": -0.010856961573729791,
+    "high": 0.0070744529920536035,
+    "wilcoxon_p": 0.423828125,
+    "ttest_p": 0.6872236708787423,
+    "n_pairs": 12
+  },
+  {
+    "left": "zebra",
+    "right": "zebra-shuffled",
+    "metric": "final_bwt_auc",
+    "mean_difference": -0.0025341306728842153,
+    "low": -0.009476123016403312,
+    "high": 0.004407861670634881,
+    "wilcoxon_p": 0.30126953125,
+    "ttest_p": 0.489217975802832,
+    "n_pairs": 12
+  },
+  {
+    "left": "zebra-replay",
+    "right": "replay",
+    "metric": "auc",
+    "mean_difference": -0.00022185180636042726,
+    "low": -0.004001944483922431,
+    "high": 0.0035582408712015764,
+    "wilcoxon_p": 0.90966796875,
+    "ttest_p": 0.9104931408189841,
+    "n_pairs": 12
+  },
+  {
+    "left": "zebra-replay",
+    "right": "replay",
+    "metric": "final_bwt_auc",
+    "mean_difference": 0.0007391855312689419,
+    "low": -0.0029911106108117913,
+    "high": 0.0044694816733496755,
+    "wilcoxon_p": 0.791015625,
+    "ttest_p": 0.7051402995086365,
+    "n_pairs": 12
+  }
+]

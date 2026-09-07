@@ -1,0 +1,47 @@
+[
+ {
+  "attack": "blackhole",
+  "i1_cons": 0.5,
+  "i2_tric": 0.511,
+  "i3_rank": 0.452,
+  "best": "I2-TRIC",
+  "best_auc": 0.511,
+  "covered": false
+ },
+ {
+  "attack": "disflooding",
+  "i1_cons": 0.995,
+  "i2_tric": 0.96,
+  "i3_rank": 0.734,
+  "best": "I1-CONS",
+  "best_auc": 0.995,
+  "covered": true
+ },
+ {
+  "attack": "localrepair",
+  "i1_cons": 0.602,
+  "i2_tric": 0.868,
+  "i3_rank": 0.833,
+  "best": "I2-TRIC",
+  "best_auc": 0.868,
+  "covered": true
+ },
+ {
+  "attack": "versionnumber",
+  "i1_cons": 0.803,
+  "i2_tric": 0.573,
+  "i3_rank": 0.456,
+  "best": "I1-CONS",
+  "best_auc": 0.803,
+  "covered": true
+ },
+ {
+  "attack": "worstparent",
+  "i1_cons": 0.6,
+  "i2_tric": 0.571,
+  "i3_rank": 0.7,
+  "best": "I3-RANK",
+  "best_auc": 0.7,
+  "covered": true
+ }
+]

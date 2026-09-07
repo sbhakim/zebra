@@ -1,0 +1,135 @@
+{
+ "no-cl": {
+  "model_bytes": 4248,
+  "retained_bytes": 0,
+  "optimiser_bytes": 8520,
+  "gradient_bytes": 4248,
+  "preprocessor_bytes": 224,
+  "static_rule_bytes": 0,
+  "python_overhead_bytes": 16,
+  "fits_adapting": {
+   "Class 0": null,
+   "Class 1": false,
+   "Class 2": true
+  },
+  "fits_inference": {
+   "Class 0": null,
+   "Class 1": true,
+   "Class 2": true
+  }
+ },
+ "ewc": {
+  "model_bytes": 4248,
+  "retained_bytes": 8496,
+  "optimiser_bytes": 8520,
+  "gradient_bytes": 4248,
+  "preprocessor_bytes": 224,
+  "static_rule_bytes": 0,
+  "python_overhead_bytes": 2554,
+  "fits_adapting": {
+   "Class 0": null,
+   "Class 1": false,
+   "Class 2": true
+  },
+  "fits_inference": {
+   "Class 0": null,
+   "Class 1": false,
+   "Class 2": true
+  }
+ },
+ "si": {
+  "model_bytes": 4248,
+  "retained_bytes": 16992,
+  "optimiser_bytes": 8520,
+  "gradient_bytes": 4248,
+  "preprocessor_bytes": 224,
+  "static_rule_bytes": 0,
+  "python_overhead_bytes": 4923,
+  "fits_adapting": {
+   "Class 0": null,
+   "Class 1": false,
+   "Class 2": true
+  },
+  "fits_inference": {
+   "Class 0": null,
+   "Class 1": false,
+   "Class 2": true
+  }
+ },
+ "lwf": {
+  "model_bytes": 4248,
+  "retained_bytes": 4248,
+  "optimiser_bytes": 8520,
+  "gradient_bytes": 4248,
+  "preprocessor_bytes": 224,
+  "static_rule_bytes": 0,
+  "python_overhead_bytes": 296,
+  "fits_adapting": {
+   "Class 0": null,
+   "Class 1": false,
+   "Class 2": true
+  },
+  "fits_inference": {
+   "Class 0": null,
+   "Class 1": true,
+   "Class 2": true
+  }
+ },
+ "gen-replay": {
+  "model_bytes": 4248,
+  "retained_bytes": 61648,
+  "optimiser_bytes": 8520,
+  "gradient_bytes": 4248,
+  "preprocessor_bytes": 224,
+  "static_rule_bytes": 0,
+  "python_overhead_bytes": 410,
+  "fits_adapting": {
+   "Class 0": null,
+   "Class 1": false,
+   "Class 2": false
+  },
+  "fits_inference": {
+   "Class 0": null,
+   "Class 1": false,
+   "Class 2": false
+  }
+ },
+ "replay": {
+  "model_bytes": 4248,
+  "retained_bytes": 1136000,
+  "optimiser_bytes": 8520,
+  "gradient_bytes": 4248,
+  "preprocessor_bytes": 224,
+  "static_rule_bytes": 0,
+  "python_overhead_bytes": 458,
+  "fits_adapting": {
+   "Class 0": null,
+   "Class 1": false,
+   "Class 2": false
+  },
+  "fits_inference": {
+   "Class 0": null,
+   "Class 1": false,
+   "Class 2": false
+  }
+ },
+ "zebra": {
+  "model_bytes": 4248,
+  "retained_bytes": 0,
+  "optimiser_bytes": 8520,
+  "gradient_bytes": 4248,
+  "preprocessor_bytes": 224,
+  "static_rule_bytes": 48,
+  "python_overhead_bytes": 16,
+  "fits_adapting": {
+   "Class 0": null,
+   "Class 1": false,
+   "Class 2": true
+  },
+  "fits_inference": {
+   "Class 0": null,
+   "Class 1": true,
+   "Class 2": true
+  }
+ }
+}

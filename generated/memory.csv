@@ -1,0 +1,8 @@
+strategy,model_bytes,retained_bytes,optimiser_bytes,gradient_bytes,preprocessor_bytes,static_rule_bytes,python_overhead_bytes
+no-cl,4248,0,8520,4248,224,0,16
+ewc,4248,8496,8520,4248,224,0,2554
+si,4248,16992,8520,4248,224,0,4923
+lwf,4248,4248,8520,4248,224,0,296
+gen-replay,4248,61648,8520,4248,224,0,410
+replay,4248,1136000,8520,4248,224,0,458
+zebra,4248,0,8520,4248,224,48,16
