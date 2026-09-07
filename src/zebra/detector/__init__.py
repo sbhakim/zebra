@@ -1,0 +1,1 @@
+"""The detector under study."""
