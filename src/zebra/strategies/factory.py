@@ -13,6 +13,7 @@ from zebra.strategies.ewc import EWC, SI
 from zebra.strategies.generative import GenerativeReplay
 from zebra.strategies.lwf import LearningWithoutForgetting
 from zebra.strategies.naive import Naive
+from zebra.strategies.quantized import DistillQuantizedReplay, QuantizedExperienceReplay
 from zebra.strategies.replay import ExperienceReplay
 from zebra.strategies.zebra import ShuffledZeBRa, ZeBRa, one_sided_constraint_loss
 
@@ -34,6 +35,8 @@ STRATEGY_DEFAULTS: dict[str, dict[str, float | int]] = {
     "zebra-r3": {"lam": 0.1},
     "zebra-shuffled": {"lam": 0.1},
     "zebra-replay": {"lam": 0.1, "capacity": 2000, "replay_ratio": 0.5},
+    "replay-q8": {"capacity": 2000, "replay_ratio": 0.5},
+    "lwf-q8replay": {"capacity": 190, "replay_ratio": 0.5, "alpha": 0.5, "temperature": 2.0},
 }
 
 
@@ -94,6 +97,10 @@ def build_strategy(
         return LearningWithoutForgetting(model, **parameters)
     if name == "replay":
         return ExperienceReplay(model, seed=seed, **parameters)
+    if name == "replay-q8":
+        return QuantizedExperienceReplay(model, seed=seed, **parameters)
+    if name == "lwf-q8replay":
+        return DistillQuantizedReplay(model, seed=seed, **parameters)
     if name == "gen-replay":
         return GenerativeReplay(model, **parameters)
     if name == "zebra":
