@@ -46,22 +46,6 @@ def memory_report() -> None:
     raise typer.Exit(main())
 
 
-@app.command("figures")
-def figures(
-    memory_json: Annotated[Path, typer.Option(exists=True, dir_okay=False)] = Path(
-        "generated/memory.json"
-    ),
-    output: Annotated[Path, typer.Option(file_okay=False)] = Path("generated/figures"),
-    results_json: Annotated[
-        Path | None, typer.Option(exists=True, dir_okay=False)
-    ] = None,
-) -> None:
-    """Generate plots from evidence artifacts."""
-    from zebra.eval.figures import main
-
-    raise typer.Exit(main(memory_json, output, results_json))
-
-
 @app.command("probe-rules")
 def probe_rules() -> None:
     """Generate the exploratory standalone rule probe."""
@@ -123,6 +107,40 @@ def experiment(
     typer.echo(f"completed {len(outputs)} paired runs in {output}")
 
 
+@app.command("sweep-capacity")
+def sweep_capacity(
+    capacities: Annotated[
+        str, typer.Option(help="Comma-separated replay buffer capacities, in windows.")
+    ] = "59,250,500,1000,4000",
+    epochs: Annotated[int, typer.Option(min=1)] = 20,
+    patience: Annotated[int, typer.Option(min=1)] = 4,
+    batch_size: Annotated[int, typer.Option(min=1)] = 128,
+    corpus: Annotated[Path, typer.Option(exists=True, file_okay=False)] = Path(
+        "corpus/IoT-Attacks-IDS/src/attack_data"
+    ),
+    output: Annotated[Path, typer.Option(file_okay=False)] = Path("generated/capacity"),
+) -> None:
+    """Re-run the replay column at other buffer capacities.
+
+    Each capacity gets its own directory. Run identity is (strategy, ordering,
+    seed), so two capacities would otherwise write the same filename and the
+    checkpoint identity check would reject the second one.
+    """
+    from zebra.eval.experiment import ExperimentConfig, run_grid
+
+    for capacity in (int(value) for value in capacities.split(",") if value.strip()):
+        config = ExperimentConfig(
+            corpus=corpus,
+            output=output / f"cap-{capacity}",
+            epochs=epochs,
+            patience=patience,
+            batch_size=batch_size,
+            strategy_options={"replay": {"capacity": capacity, "replay_ratio": 0.5}},
+        )
+        run_grid(config, ("replay",))
+        typer.echo(f"capacity {capacity}: 12 paired runs in {config.output}")
+
+
 @app.command("summarize")
 def summarize(
     run_dir: Annotated[Path, typer.Option(exists=True, file_okay=False)] = Path(
@@ -135,6 +153,22 @@ def summarize(
     from zebra.eval.report import main
 
     raise typer.Exit(main(run_dir, output, require_primary=not allow_incomplete))
+
+
+@app.command("sweep-report")
+def sweep_report(
+    primary: Annotated[
+        Path, typer.Option(exists=True, file_okay=False)
+    ] = Path("generated/runs"),
+    sweep: Annotated[
+        Path, typer.Option(exists=True, file_okay=False)
+    ] = Path("generated/capacity"),
+    output: Annotated[Path, typer.Option(file_okay=False)] = Path("generated"),
+) -> None:
+    """Aggregate the capacity sweep against the primary grid's paired cells."""
+    from zebra.eval.capacity import main
+
+    raise typer.Exit(main(primary, sweep, output))
 
 
 if __name__ == "__main__":

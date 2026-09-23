@@ -3,8 +3,8 @@ RUN = PYTHONPATH=src $(PY)
 CORPUS ?= corpus/IoT-Attacks-IDS/src/attack_data
 
 .PHONY: install lint typecheck test test-unit test-invariants test-integration \
-        corpus probe-rules probe-invariants memory-report figures experiment-report \
-        icc-report clean
+        corpus probe-rules probe-invariants memory-report experiment-report \
+        sweep sweep-report icc-report clean
 
 install:
 	$(PY) -m pip install -e ".[dev]"
@@ -36,11 +36,14 @@ probe-invariants: probe-rules
 memory-report:
 	$(RUN) -m zebra.eval.memory_report
 
-figures: memory-report
-	$(RUN) -m zebra.cli figures
-
 experiment-report:
 	$(RUN) -m zebra.cli summarize
+
+sweep:
+	$(RUN) -m zebra.cli sweep-capacity
+
+sweep-report:
+	$(RUN) -m zebra.cli sweep-report
 
 icc-report: memory-report probe-rules experiment-report
 	@echo "wrote generated evidence artifacts"
