@@ -17,8 +17,7 @@ shared detector across 60 domains, four orderings and three paired seeds.
 - Paired contrasts over the grid, with Wilcoxon signed-rank alongside a paired
   t so that disagreement between them is visible.
 
-No model is pretrained here and no split is learned. Every number the
-manuscript reports comes from a complete artifact under `generated/`.
+Every number in the paper comes from an artifact under `generated/`.
 
 ## Install
 
@@ -69,16 +68,15 @@ docs/                    protocol, decisions, status
 
 ## Notes
 
-`docs/EXPERIMENT_PROTOCOL.md` is the source of truth. This is not bit-for-bit
-parity with upstream and does not claim to be.
+`docs/EXPERIMENT_PROTOCOL.md` has the details. The protocol differs from the
+upstream scripts, so these numbers will not line up with the released ones.
 
-ZeBRa stores no historical examples, but its six calibration scalars occupy 48
-bytes and every strategy carries a 224-byte fixed scaler. "Zero retained
-samples" is the claim; "zero bytes" is not.
+ZeBRa keeps no past samples, though it does carry six calibration scalars (48
+bytes), and every strategy carries the 224-byte scaler.
 
-The standalone rule AUCs from `probe` are exploratory. They shaped the rules
-and were measured on the same corpus, so they are not independent confirmation.
-Smoke runs check that things execute, nothing more.
+The standalone rule AUCs from `probe` are exploratory: the rules were tuned on
+the same corpus they are measured on. `smoke` just checks that a run goes
+through end to end.
 
 ## License
 
