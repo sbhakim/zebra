@@ -325,9 +325,12 @@ def write_contrasts(contrasts: list[Contrast], output: Path) -> None:
 
 
 def main(run_dir: Path, output: Path, *, require_primary: bool = True) -> int:
+    from zebra.eval.equivalence import build_equivalences, write_equivalences
+
     runs = load_complete_runs(run_dir)
     payload = aggregate(runs, require_primary=require_primary)
     write_report(payload, output)
     write_contrasts(build_contrasts(runs), output)
+    write_equivalences(build_equivalences(runs), output)
     print(f"aggregated {payload['runs']} complete runs into {output}")
     return 0
