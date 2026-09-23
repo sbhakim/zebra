@@ -64,6 +64,28 @@ matters for blackhole, which is a pre-specified negative control.
 8. Generated manuscript macros fail on a missing cell rather than emitting a
    placeholder or reusing an earlier value.
 
+## Secondary analyses added after the primary grid
+
+These were specified after the primary results were known and are reported as
+secondary rather than prospective. Both re-use the frozen protocol unchanged;
+neither re-fits, re-tunes or re-splits anything.
+
+- **Buffer-capacity sweep.** The primary grid fixes replay at the released
+  capacity of 2000 windows, so the retention ratio it reports rests on a number
+  inherited rather than varied. The sweep re-runs the replay arm at other
+  capacities over the same four orderings and three seeds, leaving every other
+  setting alone, and pairs each capacity against the LwF and no-CL cells the
+  primary grid already ran. Capacity 2000 is not re-run; it is read back from
+  the primary grid and serves as the sweep's consistency check. Two capacities
+  are chosen by byte budget rather than round numbers: 59 windows is the largest
+  buffer fitting the nominal RFC 7228 Class 2 envelope after model, optimiser,
+  gradient and scaler bytes, and 7 and 29 windows match what LwF and SI retain.
+- **Equivalence testing.** A large signed-rank p-value is not evidence that a
+  difference is small. Two one-sided tests are run against a margin of one AUC
+  point, which is the threshold already used to describe LwF as close to replay,
+  and the same bound is applied to backward transfer. Contrasts failing to
+  reject are reported as underpowered, not as equivalent.
+
 ## Memory terminology
 
 Model tensor bytes, retained continual-learning tensor bytes, optimiser tensors

@@ -39,7 +39,7 @@ fetches it, or place `src/attack_data` at
 
 The aggregated results are committed under `generated/` — roughly 100 kB, which
 is enough to check every number in the paper without re-running the grid. The
-432 per-run files (109 MB) and the corpus are not; `generated/README.md` says
+828 per-run files (225 MB) and the corpus are not; `generated/README.md` says
 what they are and how to regenerate them.
 
 ## Quick start
@@ -47,6 +47,7 @@ what they are and how to regenerate them.
 ```bash
 make lint typecheck test        # test-integration additionally needs the corpus
 make icc-report                 # memory accounting, rule probes, paired grid
+make sweep sweep-report         # replay buffer-capacity sweep (needs the corpus)
 python -m zebra.cli experiment  # runs or resumes the full grid
 python -m zebra.cli summarize
 ```
@@ -60,7 +61,7 @@ Everything under `generated/` is derived and gitignored.
 ```text
 src/zebra/data/          run splits, normalisation, temporal windows
 src/zebra/invariants/    raw signals and training-only calibration
-src/zebra/strategies/    the seven arms and the shuffled-rule control
+src/zebra/strategies/    the seven arms, the byte-efficient ones, and the controls
 src/zebra/eval/          orderings, runner, metrics, controls, aggregation
 src/zebra/memory/        tensor residency and RFC 7228 envelopes
 docs/                    protocol, decisions, status
