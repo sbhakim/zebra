@@ -1,17 +1,11 @@
 """Per-window uint8 replay: more history inside the same byte envelope.
 
-A stored window is 10x14 float32 plus an int64 label, 568 B. Under the RFC 7228
-Class 2 envelope only 59 of them fit beside the model, optimiser, gradients and
-scaler. Quantising the window to uint8 cuts that to 156 B and raises the
-feasible buffer to 217.
+A stored window is 568 B as float32; uint8 cuts it to 156 B, so a Class 2 node
+holds 217 of them instead of 59.
 
-The scale is *per window*, not global, and that is the whole design. A frozen
-first-domain scaler leaves held-out values outside [0, 1] -- measured range on
-this corpus is -0.201 to 30.127 -- and `corpus.py` keeps them on purpose,
-because clipping would conceal genuine domain shift. A global uint8 range over
-[0, 1] clips that tail with a max error of 29.1. Storing each window's own
-min and max costs 8 B and drops the mean error to 0.00038, which is 0.15% of a
-feature standard deviation.
+The scale is per window, not global. The frozen scaler leaves held-out values
+well outside [0, 1] and corpus.py keeps them on purpose, so a shared range would
+clip exactly the tail that signals domain shift.
 """
 
 from __future__ import annotations
@@ -115,12 +109,9 @@ class QuantizedExperienceReplay(ExperienceReplay):
 class DistillQuantizedReplay(QuantizedExperienceReplay):
     """Distillation plus a quantised buffer: the largest hybrid that fits Class 2.
 
-    The byte accounting picks the shape of this arm rather than the other way
-    round. Class 2 leaves 33,960 B for retained state; the frozen teacher takes
-    4,248 B, and the remaining 29,712 B holds 190 quantised windows against 52
-    float32 ones. Nothing here is tuned -- alpha and temperature are LwF's
-    defaults and the ratio is replay's, so the arm carries no budget the others
-    did not get.
+    The budget picks the shape: a 4,248 B teacher leaves room for 190 quantised
+    windows, against 52 float32 ones. Coefficients are LwF's and replay's
+    defaults, so this arm gets no tuning the others did not.
     """
 
     name = "lwf-q8replay"
@@ -162,6 +153,57 @@ class DistillQuantizedReplay(QuantizedExperienceReplay):
     def after_domain(self, loader: Any, device: torch.device) -> None:
         # Absorb first, then snapshot: the teacher should reflect the model that
         # finished this domain, and the buffer the data it finished on.
+        super().after_domain(loader, device)
+        from copy import deepcopy
+
+        self.teacher = deepcopy(self.model).to(device).eval()
+        for parameter in self.teacher.parameters():
+            parameter.requires_grad_(False)
+
+
+class DistillReplay(ExperienceReplay):
+    """float32 control for `DistillQuantizedReplay`: same teacher, same budget.
+
+    Separates what the teacher buys from what the extra history buys: same
+    4,248 B teacher, same envelope, but 52 uncompressed windows instead of 190
+    quantised ones.
+    """
+
+    name = "lwf-replay"
+
+    def __init__(
+        self,
+        model: nn.Module,
+        capacity: int = 52,
+        replay_ratio: float = 0.5,
+        alpha: float = 0.5,
+        temperature: float = 2.0,
+        seed: int = 42,
+    ) -> None:
+        super().__init__(model, capacity=capacity, replay_ratio=replay_ratio, seed=seed)
+        self.alpha = alpha
+        self.temperature = temperature
+        self.teacher: nn.Module | None = None
+
+    @property
+    def retained(self) -> Any:
+        return {"buffer_x": self.buf_x, "buffer_y": self.buf_y, "teacher": self.teacher}
+
+    def penalty(
+        self, x: torch.Tensor, y: torch.Tensor, logits: torch.Tensor, nu: torch.Tensor
+    ) -> torch.Tensor:
+        if self.teacher is None:
+            return torch.zeros((), device=logits.device)
+        with torch.no_grad():
+            teacher_logits = self.teacher(x)
+        temperature = self.temperature
+        student_log = torch.nn.functional.log_softmax(logits / temperature, dim=1)
+        teacher_prob = torch.nn.functional.softmax(teacher_logits / temperature, dim=1)
+        return self.alpha * temperature**2 * torch.nn.functional.kl_div(
+            student_log, teacher_prob, reduction="batchmean"
+        )
+
+    def after_domain(self, loader: Any, device: torch.device) -> None:
         super().after_domain(loader, device)
         from copy import deepcopy
 
