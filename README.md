@@ -1,9 +1,10 @@
-# ZeBRa: Byte-Level Memory Accounting for Continual Intrusion Detection
+# ZeBRa: Memory-Efficient Continual Learning for RPL Intrusion Detection
 
 ZeBRa measures what a continual-learning strategy actually keeps resident
 between domains, in bytes, and re-runs a released RPL intrusion-detection
-benchmark under a corrected protocol. Seven strategies are compared on one
-shared detector across 60 domains, four orderings and three paired seeds.
+benchmark under a corrected protocol. The paired grid runs twelve strategies on
+one shared detector across 60 domains, four orderings and three paired seeds;
+three further arms run at an RFC 7228 Class 2 budget.
 
 ## What this provides
 
@@ -12,10 +13,15 @@ shared detector across 60 domains, four orderings and three paired seeds.
 - A corrected temporal protocol: run-disjoint splits, validation-only early
   stopping, true `(10, 14)` windows, and orderings drawn from domain
   identifiers instead of observed performance.
-- Seven strategies behind one interface — no-CL, EWC, SI, LwF, reservoir
-  replay, temporal generative replay, and ZeBRa — plus a shuffled-rule control.
+- One interface over every arm — no-CL, EWC, SI, LwF, reservoir replay,
+  temporal generative replay and ZeBRa, plus single-rule ablations and a
+  shuffled-rule control.
+- Byte-efficient arms that fit a Class 2 budget: replay over a per-window uint8
+  buffer, the same buffer behind an LwF teacher, and a float32 hybrid at the
+  same budget to tell the two apart.
 - Paired contrasts over the grid, with Wilcoxon signed-rank alongside a paired
-  t so that disagreement between them is visible.
+  t so that disagreement between them is visible, TOST equivalence for the
+  contrasts that come back null, and a replay buffer-capacity sweep.
 
 Every number in the paper comes from an artifact under `generated/`.
 
@@ -36,10 +42,10 @@ fetches it, or place `src/attack_data` at
 
 ## Artifacts
 
-The aggregated results are committed under `generated/` — roughly 100 kB, which
-is enough to check every number in the paper without re-running the grid. The
-828 per-run files (225 MB) and the corpus are not; `generated/README.md` says
-what they are and how to regenerate them.
+The aggregated results for the paired grid are committed under `generated/` —
+about 160 kB, enough to check the grid without re-running it. The 828 per-run
+files (225 MB) and the corpus are not; `generated/README.md` says what they are
+and how to regenerate them.
 
 ## Quick start
 
